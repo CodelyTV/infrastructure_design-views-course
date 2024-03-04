@@ -47,16 +47,19 @@ for i in $(seq 1 $NUM_USERS); do
     NUM_LIKES=$(($RANDOM % MAX_LIKES_PER_POST + 1))
 
     echo "    → Creating $NUM_LIKES random posts likes"
+    POST_LIKES_INSERTS=""
     for k in $(seq 1 $NUM_LIKES); do
-      echo "    ($k/$NUM_LIKES) Post liked"
 
       LIKE_ID=$(uuidgen)
       LIKED_AT=$(date +'%Y-%m-%d %H:%M:%S')
       # Seleccionar un liker_id al azar del array de USER_IDS
       LIKER_ID=${USER_IDS[$RANDOM % ${#USER_IDS[@]}]}
 
-      psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "INSERT INTO post_likes (id, post_id, user_id, liked_at) VALUES ('$LIKE_ID', '$POST_ID', '$LIKER_ID', '$LIKED_AT');" > /dev/null
+      POST_LIKES_INSERTS+="INSERT INTO post_likes (id, post_id, user_id, liked_at) VALUES ('$LIKE_ID', '$POST_ID', '$LIKER_ID', '$LIKED_AT'); "
     done
+
+    psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "BEGIN; $POST_LIKES_INSERTS COMMIT;"> /dev/null
+    echo "    Posts liked"
   done
 done
 
