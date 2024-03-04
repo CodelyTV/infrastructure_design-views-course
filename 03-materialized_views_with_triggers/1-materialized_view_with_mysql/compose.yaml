@@ -1,0 +1,15 @@
+services:
+  codely_mysql_rrss_database:
+    container_name: codely_mysql_rrss_database
+    image: mariadb:11.3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: adminpassword
+      MYSQL_DATABASE: rrss
+      MYSQL_USER: codely
+      MYSQL_PASSWORD: C0d3lyS3cr3t
+      TZ: UTC
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/1-base.sql:/docker-entrypoint-initdb.d/init.sql
