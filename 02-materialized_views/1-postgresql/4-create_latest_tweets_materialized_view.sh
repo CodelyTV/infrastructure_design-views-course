@@ -7,7 +7,7 @@ DB_PORT="5432"
 export PGPASSWORD=$DB_PASS
 
 psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME <<EOF
-CREATE VIEW post_view_with_latest_tweets AS
+CREATE MATERIALIZED VIEW post_view_with_latest_tweets_materialized AS
 SELECT
 	p.id,
 	p.user_id,

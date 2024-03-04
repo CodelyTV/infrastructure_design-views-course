@@ -1,16 +1,11 @@
 services:
-  rrss_database:
-    container_name: codely-rrss-database
+  codely_pg_rrss_database_2:
+    container_name: codely-pg-rrss-database-2
     image: "postgres:15-alpine"
     restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
-      - PGDATA=/var/lib/postgresql/data/postgres-files/.
       - POSTGRES_PASSWORD=C0d3lyS3cr3t
     volumes:
-      - data-volume:/var/lib/postgresql/data
       - ./database/1-base.sql:/docker-entrypoint-initdb.d/00_init_db.sql
-
-volumes:
-  data-volume:

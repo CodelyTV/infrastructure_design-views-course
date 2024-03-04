@@ -6,4 +6,4 @@ DB_PORT="5432"
 
 export PGPASSWORD=$DB_PASS
 
-psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "SELECT * FROM posts_view;"
+psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "SELECT * FROM post_view_with_latest_tweets_materialized;"
