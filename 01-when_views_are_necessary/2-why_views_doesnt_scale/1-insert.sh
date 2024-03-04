@@ -15,12 +15,17 @@ NUM_USERS=1000
 MAX_POSTS_PER_USER=100
 MAX_LIKES_PER_POST=200
 
+# Array para almacenar user_id
+declare -a USER_IDS
+
 printf "Starting\n"
 
 for i in $(seq 1 $NUM_USERS); do
   echo "($i/$NUM_USERS) Creating user"
 
   USER_ID=$(uuidgen)
+  # Almacenar el user_id en el array
+  USER_IDS+=($USER_ID)
   NAME="User_$i"
   EMAIL="user_$i@example.com"
   PROFILE_PICTURE="https://example.com/pictures/user_$i.jpg"
@@ -47,8 +52,8 @@ for i in $(seq 1 $NUM_USERS); do
 
       LIKE_ID=$(uuidgen)
       LIKED_AT=$(date +'%Y-%m-%d %H:%M:%S')
-      # Seleccionar un usuario al azar para el like
-      LIKER_ID=$(psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -t -c "SELECT id FROM users ORDER BY RANDOM() LIMIT 1;" | sed 's/ //g')
+      # Seleccionar un liker_id al azar del array de USER_IDS
+      LIKER_ID=${USER_IDS[$RANDOM % ${#USER_IDS[@]}]}
 
       psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "INSERT INTO post_likes (id, post_id, user_id, liked_at) VALUES ('$LIKE_ID', '$POST_ID', '$LIKER_ID', '$LIKED_AT');" > /dev/null
     done
