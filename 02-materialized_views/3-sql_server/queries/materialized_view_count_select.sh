@@ -1,9 +1,11 @@
-DB_USER="postgres"
+DB_USER="sa"
 DB_PASS="C0d3lyS3cr3t"
-DB_NAME="postgres"
+DB_NAME="master"
 DB_HOST="localhost"
-DB_PORT="5432"
+DB_PORT="1433"
+CONTAINER_NAME="codely_sqlserver_rrss_database"
+SCHEMA_NAME="rrss"
 
-export PGPASSWORD=$DB_PASS
+QUERY="SELECT * FROM rrss.posts_view_materialized"
 
-psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "SELECT * FROM posts_view_materialized;"
+docker exec -i $CONTAINER_NAME bash -c "/opt/mssql-tools/bin/sqlcmd -S localhost -U $DB_USER -P $DB_PASS -d $DB_NAME -Q \"$QUERY\""

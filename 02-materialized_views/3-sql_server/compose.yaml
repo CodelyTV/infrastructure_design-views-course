@@ -1,10 +1,10 @@
 services:
-  codely_pg_rrss_database_2:
-    image: "postgres:15-alpine"
-    restart: unless-stopped
-    ports:
-      - "5432:5432"
+  codely_sqlserver_rrss_database:
+    container_name: codely_sqlserver_rrss_database
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
     environment:
-      - POSTGRES_PASSWORD=C0d3lyS3cr3t
-    volumes:
-      - ./database/1-base.sql:/docker-entrypoint-initdb.d/00_init_db.sql
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "C0d3lyS3cr3t"
+    ports:
+      - "1433:1433"
