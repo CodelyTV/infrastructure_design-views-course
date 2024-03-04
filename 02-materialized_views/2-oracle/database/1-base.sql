@@ -30,5 +30,3 @@ SELECT p.id,
 	   (SELECT COUNT(*) FROM post_likes pl WHERE p.id = pl.post_id) AS total_likes,
 	   p.created_at
 FROM posts p;
-
-SELECT * FROM users;

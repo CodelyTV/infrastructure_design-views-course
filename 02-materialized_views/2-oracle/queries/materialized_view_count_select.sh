@@ -1,9 +1,10 @@
-DB_USER="postgres"
+DB_USER="codely"
 DB_PASS="C0d3lyS3cr3t"
-DB_NAME="postgres"
+DB_SERVICE="FREEPDB1"
 DB_HOST="localhost"
-DB_PORT="5432"
+DB_PORT="1521"
 
-export PGPASSWORD=$DB_PASS
+CONNECTION_STRING="$DB_USER/$DB_PASS@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$DB_HOST)(Port=$DB_PORT))(CONNECT_DATA=(SERVICE_NAME=$DB_SERVICE)))"
+DOCKER_COMMAND_PREFIX="docker exec -i codely_oracle_rrss_database sqlplus -s $CONNECTION_STRING"
 
-psql -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -c "SELECT * FROM posts_view_materialized;"
+echo "SELECT * FROM posts_view_materialized;" | $DOCKER_COMMAND_PREFIX
