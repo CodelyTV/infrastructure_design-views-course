@@ -12,7 +12,7 @@ export PGPASSWORD=$DB_PASS
 
 NUM_USERS=100
 MAX_POSTS_PER_USER=10
-MAX_LIKES_PER_POST=20
+MAX_LIKES_PER_POST=200
 
 printf "Starting\n\n"
 
@@ -39,7 +39,7 @@ for i in $(seq 1 $NUM_USERS); do
 
     POST_ID=$(uuidgen)
     CONTENT="This is post $j of user $i"
-    CREATED_AT=$(date +'%Y-%m-%d %H:%M:%S')
+    CREATED_AT="2025-03-04 15:30:45"
 
     INSERTS+="INSERT INTO posts (id, user_id, content, created_at) VALUES ('$POST_ID', '$USER_ID', '$CONTENT', '$CREATED_AT');"
 
@@ -47,7 +47,7 @@ for i in $(seq 1 $NUM_USERS); do
     for k in $(seq 1 $NUM_LIKES); do
       # echo "      ($k/$NUM_LIKES) Generating post likes"
       LIKE_ID=$(uuidgen)
-      LIKED_AT=$(date +'%Y-%m-%d %H:%M:%S')
+      LIKED_AT="2025-03-05 15:30:45"
       LIKER_ID=${USER_IDS[$RANDOM % ${#USER_IDS[@]}]}
 
       INSERTS+="INSERT INTO post_likes (id, post_id, user_id, liked_at) VALUES ('$LIKE_ID', '$POST_ID', '$LIKER_ID', '$LIKED_AT');"
