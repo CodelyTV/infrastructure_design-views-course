@@ -1,6 +1,5 @@
 services:
   codely_pg_rrss_database_1:
-    container_name: codely-pg-rrss-database-1
     image: "postgres:15-alpine"
     restart: unless-stopped
     ports:
