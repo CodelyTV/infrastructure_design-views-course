@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=C0d3lyS3cr3t
     volumes:
       - data-volume:/var/lib/postgresql/data
-      - ./database/schemas.sql:/docker-entrypoint-initdb.d/00_init_db.sql
+      - ./database/1-base.sql:/docker-entrypoint-initdb.d/00_init_db.sql
 
 volumes:
   data-volume:
