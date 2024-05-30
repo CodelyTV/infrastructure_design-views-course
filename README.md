@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    {COURSE_EMOJI} {COURSE_NAME_IN_ENGLISH}
+    👁️ Infrastructure design: Views
 </h1>
 
 <p align="center">
@@ -14,10 +14,10 @@
 </p>
 
 <p align="center">
-    {COURSE_SUMMARY_IN_ENGLISH}
+    Use views and materialized views to scale your application.
 </p>
 
 <p align="center">
-  <a href="https://github.com/CodelyTV/{REPOSITORY_NAME}/stargazers">Stars are welcome 😊</a><br><br>
-  Course (Spanish): <a href="{COURSE_URL}">{COURSE_NAME_IN_SPANISH}</a>
+  <a href="https://github.com/CodelyTV/infrastructure_design-views-course/stargazers">Stars are welcome 😊</a><br><br>
+  Course (Spanish): <a href="https://pro.codely.com/library/diseno-de-infraestructura-vistas-224231">Diseño de Infraestructura: Vistas</a>
 </p>
